@@ -37,10 +37,18 @@ def read_csv():
                 continue        
             capitalise_user_name(row)
             if is_invalid_last_answer(row):
-                continue
-         
-
+                continue  
             result.append(row)
-        
+    
+    return result
 
-    return result 
+def write(result):
+    with open(os.path.dirname(__file__) + '/../clean_results.csv', 'w', newline = '') as clean_file:
+        writer = csv.writer(clean_file)
+        header_row = ["user_id", "first_name", "last_name", "answer_1", "answer_2", "answer_3"]
+        writer.writerow(header_row)
+        writer.writerows(result)
+ 
+if __name__ == "__main__":
+    result = read_csv()
+    write(result) 
