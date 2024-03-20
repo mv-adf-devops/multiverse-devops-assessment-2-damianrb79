@@ -15,6 +15,16 @@ def capitalise_user_name(row):
     row[1] = row[1].capitalize()
     row[2] = row[2].capitalize()
 
+def is_invalid_last_answer(row):
+    try:
+        # if the last answer is not an integer between 1 and 10, then it is invalid
+        if not (int(row[5]) >= 1 and int(row[5]) <= 10):
+            return True
+    except ValueError:
+        # if the last answer is not an integer, then it is invalid
+        return True
+    return False
+
 def read_csv():
     result = []
     with open(os.path.dirname(__file__) + '/../results.csv', newline='') as csvfile:
@@ -25,7 +35,10 @@ def read_csv():
                 continue     
             if is_blank_line(row):
                 continue        
-            capitalise_user_name(row) 
+            capitalise_user_name(row)
+            if is_invalid_last_answer(row):
+                continue
+         
 
             result.append(row)
         

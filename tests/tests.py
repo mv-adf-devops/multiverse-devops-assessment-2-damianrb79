@@ -17,3 +17,6 @@ def test_user_name_is_capitalised():
     assert all(x[1] == x[1].capitalize() for x in result), "Did not capitalise first name"
     assert all(x[2] == x[2].capitalize() for x in result), "Did not capitalise second name"
 
+def test_read_csv_excludes_invalid_last_answer():
+    result = input.read_csv()
+    assert all(int(x[5]) >= 1 and int(x[5]) <= 10 for x in result), "Result contains invalid third answers"
