@@ -11,6 +11,10 @@ def is_blank_line(row):
         return True
     return False
 
+def capitalise_user_name(row):
+    row[1] = row[1].capitalize()
+    row[2] = row[2].capitalize()
+
 def read_csv():
     result = []
     with open(os.path.dirname(__file__) + '/../results.csv', newline='') as csvfile:
@@ -21,5 +25,9 @@ def read_csv():
                 continue     
             if is_blank_line(row):
                 continue        
+            capitalise_user_name(row) 
+
             result.append(row)
+        
+
     return result 

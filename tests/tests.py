@@ -12,3 +12,8 @@ def test_read_csv_removes_blank_line():
     result = input.read_csv()
     assert all(all(x) for x in result), "List has BLANKS"
 
+def test_user_name_is_capitalised():
+    result = input.read_csv()
+    assert all(x[1] == x[1].capitalize() for x in result), "Did not capitalise first name"
+    assert all(x[2] == x[2].capitalize() for x in result), "Did not capitalise second name"
+
